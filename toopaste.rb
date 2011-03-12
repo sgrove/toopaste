@@ -23,7 +23,7 @@ helpers do
   alias_method :h, :escape_html
 end
 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://toopaste.db")
+DataMapper.setup(:default, "sqlite3://toopaste.db")
 
 class Snippet
   include DataMapper::Resource
