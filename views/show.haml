@@ -1,0 +1,8 @@
+.snippet
+  %h1
+    = @snippet.title
+  #content{ :class => 'sbody' }
+    = @snippet.formatted_body
+  .sdate
+    Created on #{@snippet.created_at.strftime("%D at %T %Z")}
+  %a{ :href => '/' } Create new paste
