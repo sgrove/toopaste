@@ -6,7 +6,6 @@
 # - deletion url
 # - styles
 # - line wrapping?
-# - error templates
 
 require 'sinatra'
 require 'dm-core'
@@ -91,6 +90,21 @@ get '/:id' do
   if @snippet
     haml :show
   else
-    redirect '/'
+    raise not_found
   end
+end
+
+# 404
+not_found do
+  haml :error404
+end
+
+# 403
+error 403 do
+  haml :error403
+end
+
+# other errors
+error do
+  haml :error500
 end
