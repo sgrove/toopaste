@@ -23,7 +23,7 @@ helpers do
   alias_method :h, :escape_html
 end
 
-DataMapper.setup(:default, "sqlite3://toopaste.db")
+DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/toopaste.db")
 
 class Snippet
   include DataMapper::Resource
@@ -50,6 +50,7 @@ class Snippet
   end
 end
 
+DataMapper.finalize
 DataMapper.auto_upgrade!
 #File.open('toopaste.pid', 'w') { |f| f.write(Process.pid) }
 
