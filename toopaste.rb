@@ -1,5 +1,14 @@
 #!/usr/local/bin/ruby -rubygems
 
+# TO DO:
+# - snippet retention
+# - language selection
+# - deletion url
+# - xss protection
+# - styles
+# - line wrapping?
+# - error templates
+
 require 'sinatra'
 require 'dm-core'
 require 'dm-validations'
@@ -16,7 +25,7 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://toopaste.db")
 class Snippet
   include DataMapper::Resource
 
-  property :id,         Serial # primary serial key
+  property :id,         Serial
   property :title,      String, :required => true, :length => 32
   property :body,       Text,   :required => true
   property :created_at, DateTime
