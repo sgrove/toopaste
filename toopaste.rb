@@ -4,7 +4,7 @@
 # - snippet retention
 # - language selection
 # - deletion url
-# - styles
+# - tags
 # - line wrapping?
 
 require 'sinatra'
