@@ -43,10 +43,8 @@ class Snippet
 
   def formatted_body
     replacer = Time.now.strftime('[code-%d]')
-    html = Syntaxi.new("[code lang='ruby']#{self.body.gsub('[/code]',
-    replacer)}[/code]").process
-    "<div class=\"syntax syntax_ruby\">#{html.gsub(replacer, 
-    '[/code]')}</div>"
+    html = Syntaxi.new("[code lang='ruby']#{self.body.gsub('[/code]', replacer)}[/code]").process
+    "<div class=\"syntax syntax_ruby\">#{html.gsub(replacer, '[/code]')}</div>"
   end
 end
 
