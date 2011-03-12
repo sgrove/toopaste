@@ -1,7 +1,7 @@
 .snippet
   %h1
     = h @snippet.title
-  #content{ :class => 'sbody' }
+  #content{ :class => 'sbody' }<
     = @snippet.formatted_body
   .sdate
     Created on #{@snippet.created_at.strftime("%D at %T %Z")}
