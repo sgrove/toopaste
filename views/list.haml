@@ -1,0 +1,8 @@
+%h1 Snippets
+%ul
+  - @snippets.each do |snippet|
+    %li
+      %a{ :href => snippet.id, :title => snippet.body }
+        = snippet.title
+%a{ :title => 'Create new paste', :href => '/new' }
+  Create new paste

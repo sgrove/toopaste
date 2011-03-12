@@ -46,8 +46,18 @@ get '/stylesheet.css' do
     scss :stylesheet, :style => :compact
 end
 
-# new
+# list
 get '/' do
+    @snippets = Snippet.all
+    if @snippets
+        haml :list
+    else
+        redirect '/new'
+    end
+end
+
+# new
+get '/new' do
   haml :new
 end
 
