@@ -4,7 +4,6 @@
 # - snippet retention
 # - language selection
 # - deletion url
-# - xss protection
 # - styles
 # - line wrapping?
 # - error templates
@@ -19,6 +18,11 @@ require 'haml'
 require 'sass'
 
 set :haml, :format => :html5
+
+helpers do
+  include Rack::Utils
+  alias_method :h, :escape_html
+end
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://toopaste.db")
 
