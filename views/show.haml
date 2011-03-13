@@ -3,6 +3,7 @@
     = h @snippet.title
   #content{ :class => 'sbody' }<
     %pre
+      = ":::#{h @snippet.language.downcase}"
       ~ @snippet.body
   .sdate
     Created on #{@snippet.created_at.strftime("%D at %T %Z")}

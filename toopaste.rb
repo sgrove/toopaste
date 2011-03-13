@@ -33,13 +33,13 @@ class Snippet
 
   property :id,         Serial
   property :title,      String, :required => true, :length => 32
+  property :language,   String
   property :body,       Text,   :required => true
   property :created_at, DateTime
   property :updated_at, DateTime
 
   validates_presence_of :body
   validates_length_of :body, :minimum => 1
-
 end
 
 DataMapper.finalize
@@ -63,13 +63,16 @@ end
 
 # new
 get '/new' do
-  haml :new
+    @languages = %w{C CSS Delphi diff HTML RHTML Nitro-XHTML Java JavaScript JSON Ruby YAML}
+    haml :new
 end
 
 # create
 post '/' do
   @snippet = Snippet.new(:title => params[:snippet_title],
-                         :body  => params[:snippet_body])
+                         :body  => params[:snippet_body],
+                      :language => params[:snippet_language])
+
   if @snippet.save
     redirect "/#{@snippet.id}"
   else
