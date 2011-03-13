@@ -1,12 +1,10 @@
 Geekpaste
 =========
 
-A simple (and tiny) Pastie clone written to demonstrate Sinatra and DataMapper
-usage. Originally created by Nick Plante with contributions from Dave Everitt. 
+Simple pastebin forked from [zapnap] (https://github.com/zapnap/toopaste)
+to learn Sinatra.
 
-http://blog.zerosum.org/2008/7/2/clone-pastie-with-sinatra-datamapper-redux
-
-To see a live version of the service, check out http://toopastie.heroku.com
+Demo: [geekpaste.heroku.com] (http://geekpaste.heroku.com)
 
 
 Changes made so far:
