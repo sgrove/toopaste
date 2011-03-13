@@ -1,6 +1,6 @@
 .snippet
   %h2
-    = h @snippet.title
+    = "Snippet: #{h @snippet.title}"
   #content{ :class => 'sbody' }<
     %pre
       = preserve @snippet.body
