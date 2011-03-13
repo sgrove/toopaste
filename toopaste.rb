@@ -12,7 +12,8 @@ require 'dm-core'
 require 'dm-validations'
 require 'dm-timestamps'
 require 'dm-migrations'
-require 'syntaxi'
+require 'coderay'
+require 'rack/codehighlighter'
 require 'haml'
 require 'sass'
 
@@ -22,6 +23,8 @@ helpers do
   include Rack::Utils
   alias_method :h, :escape_html
 end
+
+use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
 
 DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/toopaste.db")
 
@@ -37,15 +40,6 @@ class Snippet
   validates_presence_of :body
   validates_length_of :body, :minimum => 1
 
-  Syntaxi.line_number_method = 'floating'
-  Syntaxi.wrap_at_column = 80
-  #Syntaxi.wrap_enabled = false
-
-  def formatted_body
-    replacer = Time.now.strftime('[code-%d]')
-    html = Syntaxi.new("[code lang='ruby']#{self.body.gsub('[/code]', replacer)}[/code]").process
-    "<div class=\"syntax syntax_ruby\">#{html.gsub(replacer, '[/code]')}</div>"
-  end
 end
 
 DataMapper.finalize
