@@ -55,7 +55,7 @@ end
 
 # new
 get '/' do
-  @languages = %w{C CSS Delphi diff HTML RHTML Nitro-XHTML Java JavaScript JSON Ruby YAML}
+  @languages = %w{Plaintext C CSS Delphi diff HTML RHTML Nitro-XHTML Java JavaScript JSON Ruby YAML}
   @snippets = Snippet.last(10)
     haml :new
 end
