@@ -31,7 +31,7 @@ end
 
 use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
 
-DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/toopaste.db")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://#{Dir.pwd}/toopaste.db')
 
 class Snippet
   include DataMapper::Resource
