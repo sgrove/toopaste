@@ -23,15 +23,11 @@ set :haml, :format => :html5
 helpers do
   include Rack::Utils
   alias_method :h, :escape_html
-
-  def list_snippets
-    @snippets = Snippet.last.body
-  end
 end
 
 use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://#{Dir.pwd}/toopaste.db')
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/toopaste.db")
 
 class Snippet
   include DataMapper::Resource
@@ -81,6 +77,11 @@ get '/:id' do
   @snippets = Snippet.all
   @snippet = Snippet.get(params[:id])
   if @snippet
+    if @snippet.language
+      @snippet.body = ":::#{h @snippet.language.downcase}\n#{@snippet.body}"
+    else
+      @snippet.body = ":::text\n#{@snippet.body}\n"
+    end
     haml :show
   else
     raise not_found

@@ -3,11 +3,7 @@
     = h @snippet.title
   #content{ :class => 'sbody' }<
     %pre
-      - if @snippet.language
-        = ":::#{h @snippet.language.downcase}"
-      - else
-        = ":::text"
-      ~ @snippet.body
+      = preserve @snippet.body
   .sdate
     Created on #{@snippet.created_at.strftime("%D at %T %Z")}
   %a{ :href => '/' } Create new paste
