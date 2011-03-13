@@ -1,13 +1,5 @@
 #!/usr/local/bin/ruby -rubygems
 
-# TO DO:
-# - snippet retention
-# - deletion url
-# - tags
-# - line wrapping?
-# - irc announcing
-# - spam protection
-
 require 'sinatra'
 require 'dm-core'
 require 'dm-validations'

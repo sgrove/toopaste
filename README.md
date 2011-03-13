@@ -1,5 +1,5 @@
-Toopaste
-========
+Geekpaste
+=========
 
 A simple (and tiny) Pastie clone written to demonstrate Sinatra and DataMapper
 usage. Originally created by Nick Plante with contributions from Dave Everitt. 
@@ -7,3 +7,24 @@ usage. Originally created by Nick Plante with contributions from Dave Everitt.
 http://blog.zerosum.org/2008/7/2/clone-pastie-with-sinatra-datamapper-redux
 
 To see a live version of the service, check out http://toopastie.heroku.com
+
+
+Changes made so far:
+--------------------
+
+* switch to haml templates
+* switch to 960.gs grid
+* show recent snippets
+* switch syntax highlighting engine
+* xss protection
+
+
+TODO:
+-----
+
+* snippet retention
+* deletion url
+* tags
+* line wrapping?
+* announcing to irc
+* spam protection
