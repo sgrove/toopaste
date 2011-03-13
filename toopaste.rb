@@ -55,7 +55,7 @@ end
 # new
 get '/' do
   @languages = %w{C CSS Delphi diff HTML RHTML Nitro-XHTML Java JavaScript JSON Ruby YAML}
-  @snippets = Snippet.all
+  @snippets = Snippet.last(10)
     haml :new
 end
 
@@ -74,7 +74,7 @@ end
 
 # show
 get '/:id' do
-  @snippets = Snippet.all
+  @snippets = Snippet.last(10)
   @snippet = Snippet.get(params[:id])
   if @snippet
     if @snippet.language
