@@ -1,10 +1,10 @@
 Geekpaste
 =========
 
-Simple pastebin forked from [zapnap] (https://github.com/zapnap/toopaste)
+Simple pastebin forked from [zapnap](https://github.com/zapnap/toopaste)
 to learn Sinatra.
 
-Demo: [geekpaste.heroku.com] (http://geekpaste.heroku.com)
+Demo: [geekpaste.heroku.com](http://geekpaste.heroku.com)
 
 
 Changes made so far:
