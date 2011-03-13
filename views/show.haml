@@ -3,7 +3,10 @@
     = h @snippet.title
   #content{ :class => 'sbody' }<
     %pre
-      = ":::#{h @snippet.language.downcase}"
+      - if @snippet.language
+        = ":::#{h @snippet.language.downcase}"
+      - else
+        = ":::text"
       ~ @snippet.body
   .sdate
     Created on #{@snippet.created_at.strftime("%D at %T %Z")}

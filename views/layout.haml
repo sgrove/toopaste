@@ -6,5 +6,15 @@
     %link{ :rel => 'stylesheet', :href => '/stylesheet.css' }
   %body
     #wrapper.container_12
-      #content.grid_12
+      %header.grid_12
+        %h1 Oh ze pastebin
+      #sidebar.grid_3
+        %h2 Previous Snippets
+        - if @snippets
+          %ul
+            - @snippets.each do |snippet|
+              %li
+                %a{ :href => snippet.id, :title => snippet.body }
+                  = snippet.title
+      #content.grid_9
         = yield

@@ -2,10 +2,11 @@
 
 # TO DO:
 # - snippet retention
-# - language selection
 # - deletion url
 # - tags
 # - line wrapping?
+# - irc announcing
+# - spam protection
 
 require 'sinatra'
 require 'dm-core'
@@ -22,6 +23,10 @@ set :haml, :format => :html5
 helpers do
   include Rack::Utils
   alias_method :h, :escape_html
+
+  def list_snippets
+    @snippets = Snippet.last.body
+  end
 end
 
 use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
@@ -51,19 +56,10 @@ get '/stylesheet.css' do
     scss :stylesheet, :style => :compact
 end
 
-# list
-get '/' do
-    @snippets = Snippet.all
-    if @snippets
-        haml :list
-    else
-        redirect '/new'
-    end
-end
-
 # new
-get '/new' do
-    @languages = %w{C CSS Delphi diff HTML RHTML Nitro-XHTML Java JavaScript JSON Ruby YAML}
+get '/' do
+  @languages = %w{C CSS Delphi diff HTML RHTML Nitro-XHTML Java JavaScript JSON Ruby YAML}
+  @snippets = Snippet.all
     haml :new
 end
 
@@ -82,6 +78,7 @@ end
 
 # show
 get '/:id' do
+  @snippets = Snippet.all
   @snippet = Snippet.get(params[:id])
   if @snippet
     haml :show
