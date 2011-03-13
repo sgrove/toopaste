@@ -7,5 +7,5 @@
     %select{ :name => 'snippet_language', :id => 'snippet_language' }
       - for language in @languages
         %option{ :value => language } #{language}
-    %textarea{ :name => 'snippet_body', :id => 'snippet_body', :rows => 20 }
+    %textarea{ :name => 'snippet_body', :id => 'snippet_body', :rows => 20, :cols => 40 }
     %input{ :type => 'submit', :value => 'Save' }
