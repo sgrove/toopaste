@@ -7,5 +7,4 @@ dm-postgres-adapter
 dm-sqlite-adapter
 haml
 rack-codehighlighter
-coderay
-
+ultraviolet
