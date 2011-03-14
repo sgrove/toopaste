@@ -37,7 +37,6 @@ end
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
-#File.open('toopaste.pid', 'w') { |f| f.write(Process.pid) }
 
 # stylesheet
 get '/stylesheet.css' do
