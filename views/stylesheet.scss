@@ -26,35 +26,38 @@ $white:     #ebf4fa;
 $black:     #444;
 
 /* Zenburn Colors */
+$attribute: #dfdfbf;
 $background:#3f3f3f;
-$normal:    #dcdccc;
-$normalbg:  $background;
-$debug:     #bca3a3;
-$keyword:   #f0dfaf;
-$comment:   #7f9f7f;
-$method:    #efef8f;
-$class:     #efefaf;
-$module:    #ffcfaf;
-$punct:     #93b3a3;
-$punctbg:   #3f4040;
-$symbol:    #dca3a3;
-$string:    #cc9393;
-$stringbg:  #313c36;
-$delimiter: #8f8f8f;
 $char:      #dca3a3;
 $charbg:    #2c302d;
-$ident:     #efdcbc;
+$class:     #efefaf;
+$comment:   #7f9f7f;
 $constant:  #dca3a3;
-$regex:     #c3bf9f;
-$number:    #8cd9d3;
-$attribute: #dfdfbf;
-$global:    #ffd7a7;
-$expr:      #c3bf9f;
+$debug:     #bca3a3;
+$delimiter: #8f8f8f;
 $escape:    #82a282;
+$expr:      #c3bf9f;
+$global:    #ffd7a7;
+$ident:     #efdcbc;
+$keyword:   #f0dfaf;
 $line:      #9fafaf;
 $linebg:    #262626;
 $lineh:     #333333;
 $linehbg:   #f18c96;
+$method:    #efef8f;
+$module:    #ffcfaf;
+$normal:    #dcdccc;
+$normalbg:  $background;
+$number:    #8cd9d3;
+$operator:  #f9efd0;
+$punct:     #93b3a3;
+$punctbg:   #3f4040;
+$regex:     #c3bf9f;
+$storage:   #c3bf9f;
+$string:    #cc9393;
+$stringbg:  #313c36;
+$symbol:    #dca3a3;
+$typedef:   #dfdfbf;
 
 /* custom styles */
 body {
@@ -62,151 +65,40 @@ body {
 }
 
 /* Ultraviolet */
-pre.dawn .DiffHeader {
-   background-color: #656565;
-   color: #FFFFFF;
-}
-
-pre.dawn .Operator {
-}
-
-pre.dawn .InheritedClass {
-}
-
-pre.dawn .TypeName {
-   color: #21439C;
-}
-
-pre.dawn .Number {
-   color: #A8017E;
-}
-
-pre.dawn .EmbeddedSource {
-   background-color: #ECF1FF;
-}
-
-pre.dawn {
-   /*background-color: #FFFFFF;*/
-   color: #000000;
-}
-
-pre.dawn .DiffInsertedLine {
-   background-color: #98FF9A;
-   color: #000000;
-}
-
-pre.dawn .LibraryVariable {
-   color: #A535AE;
-}
-
-pre.dawn .Storage {
-   color: #FF5600;
-}
-
-pre.dawn .InterpolatedEntity {
-   font-weight: bold;
-   color: #66CCFF;
-}
-
-pre.dawn .line-numbers {
-   background-color: #BAD6FD;
-   color: #000000;
-}
-
-pre.dawn .LocalVariable {
-   font-weight: bold;
-   color: #6392FF;
-}
-
-pre.dawn .DiffLineRange {
-   background-color: #1B63FF;
-   color: #FFFFFF;
-}
-
-pre.dawn .BlockComment {
-   color: #D33435;
-}
-
-pre.dawn .TagName {
-   color: #016CFF;
-}
-
-pre.dawn .FunctionArgument {
-}
-
-pre.dawn .BuiltInConstant {
-   color: #A535AE;
-}
-
-pre.dawn .LineComment {
-   color: #D33535;
-}
-
-pre.dawn .DiffDeletedLine {
-   background-color: #FF7880;
-   color: #000000;
-}
-
-pre.dawn .NamedConstant {
-   color: #B7734C;
-}
-
-pre.dawn .CommandMethod {
-   font-weight: bold;
-   color: #45AE34;
-}
-
-pre.dawn .TableField {
-   color: #0BB600;
-}
-
-pre.dawn .PlainXmlText {
-   color: #000000;
-}
-
-pre.dawn .Invalid {
-   background-color: #990000;
-   color: #FFFFFF;
-}
-
-pre.dawn .LibraryClassType {
-   color: #A535AE;
-}
-
-pre.dawn .TagAttribute {
-   color: #963DFF;
-}
-
-pre.dawn .Keyword {
-   font-weight: bold;
-   color: #006699;
-}
-
-pre.dawn .UserDefinedConstant {
-}
-
-pre.dawn .String {
-   color: #666666;
-}
-
-pre.dawn .DiffUnchangedLine {
-   color: #5E5E5E;
-}
-
-pre.dawn .TagContainer {
-   color: #7A7A7A;
-}
-
-pre.dawn .FunctionName {
-   color: #21439C;
-}
-
-pre.dawn .Variable {
-   font-weight: bold;
-   color: #0053FF;
-}
-
-pre.dawn .DateTimeLiteral {
-   font-weight: bold;
-   color: #66CCFF;
-}
+pre.dawn .BuiltInConstant { }
+pre.dawn .Characters { background-color: $charbg; color: $char; }
+pre.dawn .ClassTypeName { color: $class; }
+pre.dawn .Constant { color: $constant; }
+pre.dawn .Comment { color: $comment; font-style: italic; }
+pre.dawn .Directive { font-weight: bold; }
+pre.dawn .Entity { color: $method; }
+pre.dawn .FloatingPointInfixOperators { text-decoration: underline; }
+pre.dawn .FloatingPointNumbers { text-decoration: underline; }
+pre.dawn .FloatingPointPrefixOperators { text-decoration: underline; }
+pre.dawn .FunctionArgument { }
+pre.dawn .FunctionName { font-weight: bold; color: $method; }
+pre.dawn .InheritedClass { }
+pre.dawn .Invalid { }
+pre.dawn .Keyword { color: $keyword; }
+pre.dawn .LanguageKeyword { color: $keyword; }
+pre.dawn .LibraryClassType { }
+pre.dawn .LibraryConstant { }
+pre.dawn .LibraryFunction { }
+pre.dawn .LibraryVariable { }
+pre.dawn .LineNumberDirectives { text-decoration: underline; }
+pre.dawn .ModuleKeyword { color: $module; }
+pre.dawn .Number { color: $number; }
+pre.dawn .Operators { color: $operator; }
+pre.dawn .Storage { color: $module; }
+pre.dawn .StorageTypes { color: $storage; }
+pre.dawn .String { color: $string; }
+pre.dawn .SupportFunction { color: $method; }
+pre.dawn .TagAttribute { }
+pre.dawn .TagName { }
+pre.dawn .TypeName { color: $typedef; }
+pre.dawn .TypeName1 { color: $typedef; }
+pre.dawn .UserDefinedConstant { }
+pre.dawn .Variable, pre.dawn .StringVariable { color: $ident; }
+pre.dawn .VariantTypes { color: $typedef; }
+pre.dawn .line-numbers { background-color: $linebg; color: $line; }
+pre.dawn { background-color: $background; color: $normal; }
