@@ -65,6 +65,15 @@ body {
 }
 
 /* Ultraviolet */
+pre.dawn {
+    background-color: $background;
+    color: $normal;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap !important;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
 pre.dawn .BuiltInConstant { }
 pre.dawn .Characters { background-color: $charbg; color: $char; }
 pre.dawn .ClassTypeName { color: $class; }
@@ -101,4 +110,3 @@ pre.dawn .UserDefinedConstant { }
 pre.dawn .Variable, pre.dawn .StringVariable { color: $ident; }
 pre.dawn .VariantTypes { color: $typedef; }
 pre.dawn .line-numbers { background-color: $linebg; color: $line; }
-pre.dawn { background-color: $background; color: $normal; }
