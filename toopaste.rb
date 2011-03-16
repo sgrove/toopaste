@@ -26,7 +26,6 @@ class Snippet
   property :id,         Serial
   property :title,      String, :required => true, :length => 32
   property :language,   String
-  property :language,   String
   property :body,       Text,   :required => true
   property :created_at, DateTime
   property :updated_at, DateTime
