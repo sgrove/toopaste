@@ -1,6 +1,8 @@
 .snippet
   %h2
     = "Snippet: #{h @snippet.title}"
+  #meta
+    %a{ :href=> '#', :id => 'toggle-lines' }Toggle line numbers
   #content{ :class => 'sbody' }<
     %pre
       = preserve @snippet.body

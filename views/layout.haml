@@ -4,6 +4,13 @@
     %title
       = @title || 'Toopaste!'
     %link{ :rel => 'stylesheet', :href => '/stylesheet.css' }
+    %script{ :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js' }
+    :javascript
+      jQuery(function(){
+        $('#toggle-lines').click(function() {
+          $('.line-numbers').toggle();
+        });
+      });
   %body
     #wrapper.container_12
       %header.grid_12
