@@ -5,13 +5,11 @@ require 'dm-core'
 require 'dm-validations'
 require 'dm-timestamps'
 require 'dm-migrations'
-require 'rack/codehighlighter'
 require 'haml'
 require 'sass'
-require 'uv'
 require 'rack-flash'
+require 'albino'
 
-use Rack::Codehighlighter, :ultraviolet, :lines => true, :markdown => false, :element => "pre"
 use Rack::Flash
 enable :sessions
 set :haml, :format => :html5
@@ -70,9 +68,9 @@ get '/:id' do
   @snippet = Snippet.get(params[:id])
   if @snippet
     if @snippet.language
-      @snippet.body = ":::#{h @snippet.language.downcase}\n#{@snippet.body}"
+      @snippet.body = Albino.new(@snippet.body, :ruby).colorize
     else
-      @snippet.body = ":::blog_text\n#{@snippet.body}\n"
+      @snippet.body = Albino.new(@snippet.body).colorize
     end
     haml :show
   else
