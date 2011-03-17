@@ -9,6 +9,8 @@ require 'rack/codehighlighter'
 require 'haml'
 require 'sass'
 require 'uv'
+require 'rack-flash'
+require 'sinatra/redirect_with_flash'
 
 use Rack::Codehighlighter, :ultraviolet, :lines => true, :markdown => false, :element => "pre"
 
