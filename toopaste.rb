@@ -10,12 +10,13 @@ require 'haml'
 require 'sass'
 require 'uv'
 require 'rack-flash'
-require 'sinatra/redirect_with_flash'
 
 use Rack::Codehighlighter, :ultraviolet, :lines => true, :markdown => false, :element => "pre"
+use Rack::Flash
+enable :sessions
+set :haml, :format => :html5
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/toopaste.db")
-set :haml, :format => :html5
 
 helpers do
   include Rack::Utils
@@ -26,14 +27,11 @@ class Snippet
   include DataMapper::Resource
 
   property :id,         Serial
-  property :title,      String, :required => true, :length => 32
+  property :title,      String, :required => true
   property :language,   String
   property :body,       Text,   :required => true
   property :created_at, DateTime
   property :updated_at, DateTime
-
-  validates_presence_of :body
-  validates_length_of :body, :minimum => 1
 end
 
 DataMapper.finalize
@@ -60,6 +58,8 @@ post '/' do
   if @snippet.save
     redirect "/#{@snippet.id}"
   else
+    flash[:error] = ""
+    @snippet.errors.each { |e| flash[:error] += e.to_s + "<br />" }
     redirect '/'
   end
 end

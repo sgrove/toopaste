@@ -13,6 +13,9 @@
       });
   %body
     #wrapper.container_12
+      - if flash[:error]
+        #error.grid_12
+          = flash[:error]
       %header.grid_12
         %h1 Oh ze pastebin
       #sidebar.grid_3
