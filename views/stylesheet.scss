@@ -20,6 +20,7 @@ $green:     #bedf5d;
 $lightgreen:#d6eb9a;
 $orange:    #ff9834;
 $yellow:    #f6e896;
+$red:       #9B555B;
 $gray:      #e7e4d3;
 $lightgray: #f1efe2;
 $white:     #ebf4fa;
@@ -62,6 +63,13 @@ $typedef:   #dfdfbf;
 /* custom styles */
 body {
     background-color: $gray;
+}
+
+#error {
+    background-color: $red;
+    color: $white;
+    text-align: center;
+    padding: 5px;
 }
 
 #meta {

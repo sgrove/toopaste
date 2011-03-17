@@ -58,8 +58,8 @@ post '/' do
   if @snippet.save
     redirect "/#{@snippet.id}"
   else
-    flash[:error] = ""
-    @snippet.errors.each { |e| flash[:error] += e.to_s + "<br />" }
+    flash[:error] = "<strong>Uh-oh, something went wrong:</strong><br />"
+    @snippet.errors.each { |e| flash[:error] += e.to_s + ".<br />" }
     redirect '/'
   end
 end
