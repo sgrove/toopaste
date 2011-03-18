@@ -92,6 +92,13 @@ a:hover {
     padding: 10px;
 }
 
+#github img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+}
+
 /* Ultraviolet */
 pre.dawn {
     background-color: $background;
