@@ -5,7 +5,7 @@
       - @snippets.each do |snippet|
         %li
           %a{ :href => snippet.id, :title => snippet.title }
-            = h snippet.title
+            = "#{h snippet.title} (#{h snippet.language})"
 #content.grid_9
   .snippet
     %h2 Paste a new code snippet
