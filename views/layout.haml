@@ -17,15 +17,6 @@
         #error.grid_12
           = flash[:error]
       %header.grid_12
-        %h1 Oh ze pastebin
-      #sidebar.grid_3
-        %h2 Recent Snippets
-        - if @snippets
-          %ul
-            - @snippets.each do |snippet|
-              %li
-                %a{ :href => snippet.id, :title => snippet.title }
-                  = h snippet.title
-        %a{ :href => '/' }Create new paste
-      #content.grid_9
-        = yield
+        %h1
+          %a{ :href => '/' } geekpaste.heroku.com
+      = yield

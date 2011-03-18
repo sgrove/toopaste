@@ -66,7 +66,6 @@ end
 
 # show
 get '/:id' do
-  @snippets = Snippet.last(10)
   @snippet = Snippet.get(params[:id])
   if @snippet
     if @snippet.language

@@ -1,11 +1,22 @@
-.snippet
-  %h2 Paste a new code snippet below:
-  %form{ :action => '/', :method => 'POST' }
-    %label{ :for => 'snippet_title' } Title:
-    %input{ :type => 'text', :name => 'snippet_title' }
-    %label{ :for => 'snippet_language' } Language:
-    %select{ :name => 'snippet_language', :id => 'snippet_language' }
-      - for language in @languages
-        %option{ :value => language } #{language}
-    %textarea{ :name => 'snippet_body', :id => 'snippet_body', :rows => 20, :cols => 40 }
-    %input{ :type => 'submit', :value => 'Save' }
+#sidebar.grid_3
+  %h2 Recent Snippets
+  - if @snippets
+    %ul
+      - @snippets.each do |snippet|
+        %li
+          %a{ :href => snippet.id, :title => snippet.title }
+            = h snippet.title
+#content.grid_9
+  .snippet
+    %h2 Paste a new code snippet
+    %form{ :action => '/', :method => 'POST' }
+      %label{ :for => 'snippet_title' } Title:
+      %input{ :type => 'text', :name => 'snippet_title' }
+      %br
+      %label{ :for => 'snippet_language' } Language:
+      %select{ :name => 'snippet_language', :id => 'snippet_language' }
+        - for language in @languages
+          %option{ :value => language } #{language}
+      %br
+      %textarea{ :name => 'snippet_body', :id => 'snippet_body', :rows => 20, :cols => 60 }
+      %input{ :type => 'submit', :value => 'Save' }

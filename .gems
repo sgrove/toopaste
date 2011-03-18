@@ -9,4 +9,3 @@ haml
 rack-codehighlighter
 ultraviolet
 rack-flash
-sinatra-redirect-with-flash

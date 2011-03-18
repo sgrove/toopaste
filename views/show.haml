@@ -1,12 +1,11 @@
-.snippet
-  %h2
-    = "Snippet: #{h @snippet.title}"
-  #meta
-    %a{ :href=> '#', :id => 'toggle-lines' }Toggle line numbers
-  #content{ :class => 'sbody' }<
-    %pre
-      = preserve @snippet.body
-  .sdate
-    Created on #{@snippet.created_at.strftime("%D at %T %Z")}
-  %a{ :href => '/' } Create new paste
-
+#content.grid_12
+  .snippet
+    %h2
+      = "Snippet: #{h @snippet.title}"
+    #meta
+      %a{ :href=> '#', :id => 'toggle-lines' }Toggle line numbers
+    #content{ :class => 'sbody' }<
+      %pre
+        = preserve @snippet.body
+    #info
+      Posted #{@snippet.created_at.strftime("%Y-%m-%d %H:%M:%S")}

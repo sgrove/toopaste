@@ -65,6 +65,16 @@ body {
     background-color: $gray;
 }
 
+a,
+a:visited {
+    color: $darkblue;
+}
+
+a:active,
+a:hover {
+    color: $blue;
+}
+
 #error {
     background-color: $red;
     color: $white;
@@ -76,6 +86,12 @@ body {
     text-align: right;
 }
 
+#info {
+    background: $background;
+    color: $normal;
+    padding: 10px;
+}
+
 /* Ultraviolet */
 pre.dawn {
     background-color: $background;
@@ -85,6 +101,7 @@ pre.dawn {
     white-space: -pre-wrap;
     white-space: -o-pre-wrap;
     word-wrap: break-word;
+    padding: 10px;
 }
 pre.dawn .BuiltInConstant { }
 pre.dawn .Characters { background-color: $charbg; color: $char; }
