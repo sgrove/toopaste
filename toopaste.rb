@@ -51,11 +51,6 @@ set :public, Uv.path.first + '/render/xhtml/files'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/toopaste.db")
 
-helpers do
-  include Rack::Utils
-  alias_method :h, :escape_html
-end
-
 class Snippet
   include DataMapper::Resource
 
