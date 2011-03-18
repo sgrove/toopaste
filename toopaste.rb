@@ -11,6 +11,18 @@ require 'uv'
 require 'rack-flash'
 
 set :default_theme, 'zenburnesque'
+set :preferred_languages, [
+  'plain_text',
+  'ruby',
+  'python',
+  'tcl',
+  'javascript',
+  'html',
+  'c',
+  'c++',
+  'java',
+  'php'
+]
 
 use Rack::Flash
 enable :sessions
@@ -65,6 +77,7 @@ end
 
 # new
 get '/' do
+  @preferred_languages = settings.preferred_languages
   @snippets = Snippet.last(10)
   haml :new
 end

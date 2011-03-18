@@ -15,8 +15,13 @@
       %br
       %label{ :for => 'snippet_language' } Language:
       %select{ :name => 'snippet_language', :id => 'snippet_language' }
-        - LANGUAGES.each_pair do |language, name|
-          %option{ :value => language } #{name}
+        / first the list of prefered languages
+        - @preferred_languages.each do |preferred|
+          %option{ :value => preferred} #{LANGUAGES[preferred]}
+        %option ------------------------------------------------------------------------
+        - LANGUAGES.keys.sort.each do |language|
+          - if not @preferred_languages.include? language
+            %option{ :value => language } #{LANGUAGES[language]}
       %br
       %textarea{ :name => 'snippet_body', :id => 'snippet_body', :rows => 20, :cols => 60 }
       %br
