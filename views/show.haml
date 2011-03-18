@@ -4,8 +4,18 @@
       = "Snippet: #{h @snippet.title}"
     #meta
       %a{ :href=> '#', :id => 'toggle-lines' }Toggle line numbers
-    #content{ :class => 'sbody' }<
-      %pre
-        = preserve @snippet.body
+    #content{ :class => 'sbody' }
+      = preserve @content
     #info
       Posted #{@snippet.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+
+      %form{ :action => '/switch_theme', :method => 'POST', :id => 'switch-theme' }
+        %input{ :type => 'hidden', :name => 'snippet_id', :value => @snippet.id}
+        %select{ :name => 'theme' }
+          - THEMES.each do |theme|
+            - if @active_theme == theme
+              %option{:selected => 'selected'} #{theme}
+            - else
+              %option #{theme}
+        %input{ :type => 'submit', :value => 'switch theme'}
+

@@ -92,6 +92,13 @@ a:hover {
     padding: 10px;
 }
 
+#switch-theme {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+
 #github img {
     position: absolute;
     top: 0;
@@ -99,10 +106,7 @@ a:hover {
     border: 0;
 }
 
-/* Ultraviolet */
-pre.dawn {
-    background-color: $background;
-    color: $normal;
+pre {
     white-space: pre-wrap;
     white-space: -moz-pre-wrap !important;
     white-space: -pre-wrap;
@@ -110,39 +114,3 @@ pre.dawn {
     word-wrap: break-word;
     padding: 10px;
 }
-pre.dawn .BuiltInConstant { }
-pre.dawn .Characters { background-color: $charbg; color: $char; }
-pre.dawn .ClassTypeName { color: $class; }
-pre.dawn .Constant { color: $constant; }
-pre.dawn .Comment { color: $comment; font-style: italic; }
-pre.dawn .Directive { font-weight: bold; }
-pre.dawn .Entity { color: $method; }
-pre.dawn .FloatingPointInfixOperators { text-decoration: underline; }
-pre.dawn .FloatingPointNumbers { text-decoration: underline; }
-pre.dawn .FloatingPointPrefixOperators { text-decoration: underline; }
-pre.dawn .FunctionArgument { }
-pre.dawn .FunctionName { font-weight: bold; color: $method; }
-pre.dawn .InheritedClass { }
-pre.dawn .Invalid { }
-pre.dawn .Keyword { color: $keyword; }
-pre.dawn .LanguageKeyword { color: $keyword; }
-pre.dawn .LibraryClassType { }
-pre.dawn .LibraryConstant { }
-pre.dawn .LibraryFunction { }
-pre.dawn .LibraryVariable { }
-pre.dawn .LineNumberDirectives { text-decoration: underline; }
-pre.dawn .ModuleKeyword { color: $module; }
-pre.dawn .Number { color: $number; }
-pre.dawn .Operators { color: $operator; }
-pre.dawn .Storage { color: $module; }
-pre.dawn .StorageTypes { color: $storage; }
-pre.dawn .String { color: $string; }
-pre.dawn .SupportFunction { color: $method; }
-pre.dawn .TagAttribute { }
-pre.dawn .TagName { }
-pre.dawn .TypeName { color: $typedef; }
-pre.dawn .TypeName1 { color: $typedef; }
-pre.dawn .UserDefinedConstant { }
-pre.dawn .Variable, pre.dawn .StringVariable { color: $ident; }
-pre.dawn .VariantTypes { color: $typedef; }
-pre.dawn .line-numbers { background-color: $linebg; color: $line; }

@@ -5,7 +5,7 @@
       - @snippets.each do |snippet|
         %li
           %a{ :href => snippet.id, :title => snippet.title }
-            = "#{h snippet.title} (#{h snippet.language})"
+            = "#{h snippet.title} (#{LANGUAGES[snippet.language]})"
 #content.grid_9
   .snippet
     %h2 Paste a new code snippet
@@ -15,8 +15,8 @@
       %br
       %label{ :for => 'snippet_language' } Language:
       %select{ :name => 'snippet_language', :id => 'snippet_language' }
-        - for language in @languages
-          %option{ :value => language } #{language}
+        - LANGUAGES.each_pair do |language, name|
+          %option{ :value => language } #{name}
       %br
       %textarea{ :name => 'snippet_body', :id => 'snippet_body', :rows => 20, :cols => 60 }
       %br

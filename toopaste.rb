@@ -5,16 +5,37 @@ require 'dm-core'
 require 'dm-validations'
 require 'dm-timestamps'
 require 'dm-migrations'
-require 'rack/codehighlighter'
 require 'haml'
 require 'sass'
 require 'uv'
 require 'rack-flash'
 
-use Rack::Codehighlighter, :ultraviolet, :lines => true, :markdown => false, :element => "pre"
+set :default_theme, 'zenburnesque'
+
 use Rack::Flash
 enable :sessions
 set :haml, :format => :html5
+
+# setup constants for supported languages and themes, in ultraviolet they are 
+# called syntax_name and render_style. In order to access the Textpow objects
+# that include pretty names for each supported syntax file we need to extend
+# the ultraviolet module because it does not provide an accessor:
+module Uv
+  def Uv.get_syntaxes
+    @syntaxes
+  end
+end
+languages = {}
+Uv.init_syntaxes unless Uv.get_syntaxes
+Uv.get_syntaxes.each do |syntax|
+  languages[syntax.first] = syntax[1].name
+end
+LANGUAGES = languages
+THEMES = Uv.themes
+
+# this serves the static ultraviolet css files directly, another solution
+# would be to copy these files to ./public (Uv.copy_files)
+set :public, Uv.path.first + '/render/xhtml/files'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/toopaste.db")
 
@@ -44,16 +65,21 @@ end
 
 # new
 get '/' do
-  @languages = %w{Actionscript Active4d Active4d_html Active4d_ini Active4d_library Ada Antlr Apache Applescript Asp Asp_vb.net Bibtex Blog_html Blog_markdown Blog_text Blog_textile Build Bulletin_board C C++ Cake Camlp4 Cm Coldfusion Context_free Cs Css Css_experimental Csv D Diff Dokuwiki Dot Doxygen Dylan Eiffel Erlang F-script Fortran Fxscript Greasemonkey Gri Groovy Gtd Gtdalt Haml Haskell Html Html-asp Html_django Html_for_asp.net Html_mason Html_rails Html_tcl Icalendar Inform Ini Installer_distribution_script Io Java Javaproperties Javascript Javascript_+_prototype Javascript_+_prototype_bracketed Jquery_javascript Json Languagedefinition Latex Latex_beamer Latex_log Latex_memoir Lexflex Lighttpd Lilypond Lisp Literate_haskell Logo Logtalk Lua M Macports_portfile Mail Makefile Man Markdown Mediawiki Mel Mips Mod_perl Modula-3 Moinmoin Mootools Movable_type Multimarkdown Objective-c Objective-c++ Ocaml Ocamllex Ocamlyacc Opengl Pascal Perl Php Plain_text Pmwiki Postscript Processing Prolog Property_list Python Python_django Qmake_project Qt_c++ Quake3_config R R_console Ragel Rd_r_documentation Regexp Regular_expressions_oniguruma Regular_expressions_python Release_notes Remind Restructuredtext Rez Ruby Ruby_experimental Ruby_on_rails S5 Scheme Scilab Setext Shell-unix-generic Slate Smarty Sql Sql_rails Ssh-config Standard_ml Strings_file Subversion_commit_message Sweave Swig Tcl Template_toolkit Tex Tex_math Textile Tsv Twiki Txt2tags Vectorscript Xhtml_1.0 Xml Xml_strict Xsl Yaml Yui_javascript}
   @snippets = Snippet.last(10)
-    haml :new
+  haml :new
 end
 
 # create
 post '/' do
+  if LANGUAGES.keys.include? params[:snippet_language]
+    language = params[:snippet_language]
+  else
+    language = 'plain_text'
+  end
+
   @snippet = Snippet.new(:title => params[:snippet_title],
                          :body  => params[:snippet_body],
-                      :language => params[:snippet_language])
+                      :language => language)
 
   if @snippet.save
     redirect "/#{@snippet.id}"
@@ -68,15 +94,28 @@ end
 get '/:id' do
   @snippet = Snippet.get(params[:id])
   if @snippet
-    if @snippet.language
-      @snippet.body = ":::#{h @snippet.language.downcase}\n#{@snippet.body}"
+    # active theme (render_style)
+    if session.has_key? :active_theme 
+      # user selected theme saved in cookie
+      @active_theme = session[:active_theme]  
     else
-      @snippet.body = ":::blog_text\n#{@snippet.body}\n"
+      @active_theme = settings.default_theme
     end
+
+    @content = Uv.parse(@snippet.body, 'xhtml', @snippet.language, true, @active_theme)
+
     haml :show
   else
     raise not_found
   end
+end
+
+# switch active theme
+post '/switch_theme' do
+  if THEMES.include? params[:theme]
+    session[:active_theme] = params[:theme]
+  end
+  redirect to("/#{params[:snippet_id]}")
 end
 
 # 404
@@ -93,3 +132,4 @@ end
 error do
   haml :error500
 end
+

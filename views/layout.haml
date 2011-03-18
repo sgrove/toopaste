@@ -4,12 +4,19 @@
     %title
       = @title || 'Toopaste!'
     %link{ :rel => 'stylesheet', :href => '/stylesheet.css' }
+    - if @active_theme
+      %link{ :rel => 'stylesheet', :href => "/css/#{@active_theme}.css" }
     %script{ :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js' }
     :javascript
       jQuery(function(){
-        $('#toggle-lines').click(function() {
+        $('#toggle-lines').click(function(event) {
           $('.line-numbers').toggle();
+          event.preventDefault();
         });
+        $('#switch-theme select').change(function() {
+          $('#switch-theme').submit();
+        });
+        $('#switch-theme input[type="submit"]').hide();
       });
   %body
     #wrapper.container_12
