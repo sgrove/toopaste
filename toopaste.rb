@@ -91,9 +91,17 @@ post '/' do
 end
 
 # show
-get '/:id' do
-  @snippet = Snippet.get(params[:id])
+get %r{/(raw/)?(\d+)} do # '/:id' do
+  raw = true if params[:captures][0]
+  id = params[:captures][1]
+
+  @snippet = Snippet.get(id)
   if @snippet
+    if raw
+      content_type 'text/plain'
+      return @snippet.body    
+    end
+
     # active theme (render_style)
     if session.has_key? :active_theme 
       # user selected theme saved in cookie

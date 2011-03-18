@@ -3,11 +3,14 @@
     %h2
       = "Snippet: #{h @snippet.title}"
     #meta
-      %a{ :href=> '#', :id => 'toggle-lines' }Toggle line numbers
+      %a{ :href=> "/raw/#{@snippet.id}" } raw
+      &middot;
+      %a{ :href=> '#', :id => 'toggle-lines' } toggle line numbers
     #content{ :class => 'sbody' }
       = preserve @content
     #info
-      Posted #{@snippet.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+      #{LANGUAGES[@snippet.language]}
+      posted on #{@snippet.created_at.strftime("%Y-%m-%d at %H:%M:%S")}
 
       %form{ :action => '/switch_theme', :method => 'POST', :id => 'switch-theme' }
         %input{ :type => 'hidden', :name => 'snippet_id', :value => @snippet.id}
