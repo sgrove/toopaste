@@ -4,17 +4,9 @@ Geekpaste
 Simple pastebin forked from [zapnap](https://github.com/zapnap/toopaste)
 to learn Sinatra.
 
-Demo: [geekpaste.heroku.com](http://geekpaste.heroku.com)
+Live Demo: [paste.geekosphere.org](http://paste.geekosphere.org)
 
-
-Changes made so far:
---------------------
-
-* switch to haml templates
-* switch to 960.gs grid
-* show recent snippets
-* switch syntax highlighting engine
-* xss protection
+[Contributors](https://github.com/jessor/toopaste/contributors)
 
 
 TODO:
