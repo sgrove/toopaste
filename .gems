@@ -6,6 +6,7 @@ dm-migrations
 dm-postgres-adapter
 dm-sqlite-adapter
 haml
+rack-codehighlighter
+ultraviolet
 rack-flash
-nokogiri
-albino
+sinatra-redirect-with-flash
