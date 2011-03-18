@@ -55,11 +55,19 @@ class Snippet
   include DataMapper::Resource
 
   property :id,         Serial
-  property :title,      String, :required => true
+  property :title,      String
   property :language,   String
   property :body,       Text,   :required => true
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  def title
+    if not @title.empty?
+      @title
+    else
+      "##{@id}"
+    end
+  end
 end
 
 DataMapper.finalize
