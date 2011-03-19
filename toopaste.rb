@@ -68,6 +68,16 @@ class Snippet
       "##{@id}"
     end
   end
+
+  def filename
+    safe_title = 'toopaste-' + title.gsub(/[^\w\-\.]/,'')
+    Uv.get_syntaxes.each do |syntax|
+      if syntax.first == @language and not syntax[1].fileTypes.empty?
+        return "#{safe_title}.#{syntax[1].fileTypes.first}"
+      end
+    end
+    return "#{safe_title}.txt"
+  end
 end
 
 DataMapper.finalize
@@ -107,15 +117,20 @@ post '/' do
 end
 
 # show
-get %r{/(raw/)?(\d+)} do # '/:id' do
-  raw = true if params[:captures][0]
+get %r{/(raw|download)?/?(\d+)} do # '/:id' do
+  raw = true if params[:captures][0] and params[:captures][0] == 'raw'
+  download = true if params[:captures][0] and params[:captures][0] == 'download'
   id = params[:captures][1]
 
   @snippet = Snippet.get(id)
   if @snippet
-    if raw
+    if raw or download
+      disposition = 'inline'
+      disposition = 'attachment' if download
+
       content_type 'text/plain'
-      return @snippet.body    
+      headers['Content-Disposition'] = "#{disposition}; filename=\"#{@snippet.filename}\""
+      return @snippet.body
     end
 
     # active theme (render_style)
