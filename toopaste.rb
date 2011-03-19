@@ -10,6 +10,12 @@ require 'sass'
 require 'uv'
 require 'rack-flash'
 
+use Rack::Flash
+
+enable :sessions
+
+set :pagetitle, 'paste.geekosphere.org'
+set :haml, :format => :html5
 set :default_theme, 'zenburnesque'
 set :preferred_languages, [
   'plain_text',
@@ -23,10 +29,6 @@ set :preferred_languages, [
   'java',
   'php'
 ]
-
-use Rack::Flash
-enable :sessions
-set :haml, :format => :html5
 
 # setup constants for supported languages and themes, in ultraviolet they are 
 # called syntax_name and render_style. In order to access the Textpow objects
@@ -127,6 +129,8 @@ get %r{/(raw/)?(\d+)} do # '/:id' do
     end
 
     @content = Uv.parse(@snippet.body, 'xhtml', @snippet.language, true, @active_theme)
+
+    @title = "#{@snippet.title} | #{settings.pagetitle}"
 
     haml :show
   else
