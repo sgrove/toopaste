@@ -124,6 +124,10 @@ label {
     float: right;
 }
 
+#switch-theme select, input {
+    width: auto;
+}
+
 #github img {
     position: absolute;
     top: 0;

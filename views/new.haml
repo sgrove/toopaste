@@ -5,7 +5,9 @@
       - @snippets.each do |snippet|
         %li
           %a{ :href => snippet.id, :title => snippet.title }
-            & #{snippet.title} (#{LANGUAGES[snippet.language]})
+            & #{snippet.title}
+            - if LANGUAGES.has_key? snippet.language
+              & (#{LANGUAGES[snippet.language]})
 #content.grid_9
   .snippet
     %h2 Paste a new code snippet
