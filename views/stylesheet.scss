@@ -61,6 +61,9 @@ $symbol:    #dca3a3;
 $typedef:   #dfdfbf;
 
 /* custom styles */
+
+$monospace: "Bitstream Vera Sans Mono", "Monaco", "Consolas", "Courier New", "monospace";
+
 body {
     background-color: $gray;
 }
@@ -82,7 +85,7 @@ select {
     border: 1px solid $darkblue;
     background-color: $gray;
     -webkit-box-shadow: $lightgray 0px 0px 4px;
-    font-family: 'monospace', 'Courier New';
+    font-family: $monospace;
     padding: 2px;
 }
 
@@ -142,4 +145,5 @@ pre {
     white-space: -o-pre-wrap;
     word-wrap: break-word;
     padding: 10px;
+    font-family: $monospace;
 }
