@@ -76,6 +76,30 @@ a:hover {
     color: $blue;
 }
 
+input,
+textarea,
+select {
+    border: 1px solid $darkblue;
+    background-color: $gray;
+    -webkit-box-shadow: $lightgray 0px 0px 4px;
+    font-family: 'monospace', 'Courier New';
+    padding: 2px;
+}
+
+textarea,
+input[type="text"] {
+    width: 604px;
+}
+
+select,
+input[type="submit"] {
+    width: 610px;
+}
+
+label {
+    display: block;
+}
+
 #error {
     background-color: $red;
     color: $white;

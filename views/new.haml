@@ -23,6 +23,6 @@
           - if not @preferred_languages.include? language
             %option{ :value => language } #{LANGUAGES[language]}
       %br
-      %textarea{ :name => 'snippet_body', :id => 'snippet_body', :rows => 20, :cols => 60 }
+      %textarea{ :name => 'snippet_body', :id => 'snippet_body', :rows => 20 }
       %br
       %input{ :type => 'submit', :value => 'Save' }
