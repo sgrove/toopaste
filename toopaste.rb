@@ -76,6 +76,15 @@ class Snippet
     end
   end
 
+  # make sure the accessed language is supported by ultraviolet
+  def language
+    if LANGUAGES.keys.include? @language
+      return @language
+    else
+      return 'plain_text'
+    end
+  end
+
   def filename
     safe_title = 'toopaste-' + title.gsub(/[^\w\-\.]/,'')
     Uv.get_syntaxes.each do |syntax|
