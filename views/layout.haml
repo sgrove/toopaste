@@ -2,7 +2,7 @@
 %html
   %head
     %title
-      = @title || 'Toopaste!'
+      = @title || settings.pagetitle
     %link{ :rel => 'stylesheet', :href => '/stylesheet.css' }
     - if @active_theme
       %link{ :rel => 'stylesheet', :href => "/css/#{@active_theme}.css" }
@@ -25,7 +25,7 @@
           = flash[:error]
       %header.grid_12
         %h1
-          %a{ :href => '/' } geekpaste.heroku.com
+          %a{ :href => '/' } #{settings.pagetitle}
       = yield
   %a{ :href => 'https://github.com/jessor/toopaste', :id => 'github' }
     %img{ :src => 'https://d3nwyuy0nl342s.cloudfront.net/img/7afbc8b248c68eb468279e8c17986ad46549fb71/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67' }
