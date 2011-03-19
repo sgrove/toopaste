@@ -47,9 +47,14 @@ end
 LANGUAGES = languages
 THEMES = Uv.themes
 
-# this serves the static ultraviolet css files directly, another solution
-# would be to copy these files to ./public (Uv.copy_files)
-set :public, Uv.path.first + '/render/xhtml/files'
+# the default location of sinatra for static files is ./public, this
+# creates the directory for ultraviolet and copies the theme stylesheets.
+# the other solution would be to copy the files in the repo.
+uv_path = File.join(File.dirname(__FILE__), 'public', 'ultraviolet')
+if not File.exists? uv_path
+  Dir.mkdir(uv_path)
+  Uv.copy_files('xhtml', uv_path)
+end
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/toopaste.db")
 
