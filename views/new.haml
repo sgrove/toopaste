@@ -12,9 +12,6 @@
   .snippet
     %h2 Paste a new code snippet
     %form{ :action => '/', :method => 'POST' }
-      %label{ :for => 'snippet_title' } Title:
-      %input{ :type => 'text', :name => 'snippet_title' }
-      %br
       %label{ :for => 'snippet_language' } Language:
       %select{ :name => 'snippet_language', :id => 'snippet_language' }
         / first the list of prefered languages
@@ -26,5 +23,12 @@
             %option{ :value => language } #{LANGUAGES[language]}
       %br
       %textarea{ :name => 'snippet_body', :id => 'snippet_body', :rows => 20 }
+      %br
+      %label{ :for => 'snippet_title' } Title:
+      %input{ :type => 'text', :name => 'snippet_title' }
+      %br
+      %label{ :for => 'snippet_author' } Author:
+      %input{ :type => 'text', :name => 'snippet_author' }
+      %br
       %br
       %input{ :type => 'submit', :value => 'Save' }

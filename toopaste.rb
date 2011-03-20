@@ -65,6 +65,7 @@ class Snippet
   property :id,         Serial
   property :title,      String
   property :language,   String
+  property :author,     String, :required => false
   property :body,       Text,   :required => true
   property :created_at, DateTime
   property :updated_at, DateTime
@@ -121,8 +122,10 @@ post '/' do
   end
 
   @snippet = Snippet.new(:title => params[:snippet_title],
+                         :language => language,
                          :body  => params[:snippet_body],
-                      :language => language)
+                         :author => params[:snippet_author]
+                        )
 
   if @snippet.save
     redirect "/#{@snippet.id}"

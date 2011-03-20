@@ -12,7 +12,9 @@
       = preserve @content
     #info
       #{LANGUAGES[@snippet.language]}
-      posted on #{@snippet.created_at.strftime("%Y-%m-%d at %H:%M:%S")}
+      posted on #{@snippet.created_at.strftime("%Y-%m-%d at %H:%M:%S (%Z)")}
+      - if @snippet.author
+        & by #{@snippet.author}
 
       %form{ :action => '/switch_theme', :method => 'POST', :id => 'switch-theme' }
         %input{ :type => 'hidden', :name => 'snippet_id', :value => @snippet.id}
