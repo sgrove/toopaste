@@ -9,26 +9,31 @@ require 'haml'
 require 'sass'
 require 'uv'
 require 'rack-flash'
+require 'rack/csrf'
 
-use Rack::Flash
+configure do
+  use Rack::Flash
+  use Rack::Session::Cookie, :secret => 'sYODA)?1^jL_PcRpg*RkBaX;2!wh\&°0'
+  use Rack::Csrf, :raise => true
 
-enable :sessions
+  enable :sessions
 
-set :pagetitle, 'paste.geekosphere.org'
-set :haml, :format => :html5
-set :default_theme, 'zenburnesque'
-set :preferred_languages, [
-  'plain_text',
-  'ruby',
-  'python',
-  'tcl',
-  'javascript',
-  'html',
-  'c',
-  'c++',
-  'java',
-  'php'
-]
+  set :pagetitle, 'paste.geekosphere.org'
+  set :haml, :format => :html5
+  set :default_theme, 'zenburnesque'
+  set :preferred_languages, [
+    'plain_text',
+    'ruby',
+    'python',
+    'tcl',
+    'javascript',
+    'html',
+    'c',
+    'c++',
+    'java',
+    'php'
+  ]
+end
 
 # setup constants for supported languages and themes, in ultraviolet they are 
 # called syntax_name and render_style. In order to access the Textpow objects
