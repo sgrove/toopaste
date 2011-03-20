@@ -8,4 +8,3 @@ dm-sqlite-adapter
 haml
 ultraviolet
 rack-flash
-rack_csrf

@@ -9,13 +9,9 @@ require 'haml'
 require 'sass'
 require 'uv'
 require 'rack-flash'
-require 'rack/csrf'
 
 configure do
   use Rack::Flash
-  use Rack::Session::Cookie, :secret => 'sYODA)?1^jL_PcRpg*RkBaX;2!wh\&°0'
-  # use Rack::Csrf, :raise => true
-
   enable :sessions
 
   set :pagetitle, 'paste.geekosphere.org'

@@ -27,5 +27,4 @@
       %br
       %textarea{ :name => 'snippet_body', :id => 'snippet_body', :rows => 20 }
       %br
-      = Rack::Csrf.csrf_tag(env)
       %input{ :type => 'submit', :value => 'Save' }
