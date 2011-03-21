@@ -9,11 +9,18 @@ Live Demo: [paste.geekosphere.org](http://paste.geekosphere.org)
 [Contributors](https://github.com/jessor/toopaste/contributors)
 
 
+Hints:
+------
+
+* Change password in config, then delete snippets from the cli with
+
+        curl -u <user>:<password> -X DELETE http://domain.tld/<snippetid>
+
+
 TODO:
 -----
 
 * snippet retention
-* deletion url
 * tags
 * line wrapping?
 * announcing to irc

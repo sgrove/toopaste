@@ -10,34 +10,7 @@ require 'sass'
 require 'uv'
 require 'rack-flash'
 require 'drb'
-
-configure do
-  use Rack::Flash
-  enable :sessions
-
-  set :pagetitle, 'paste.geekosphere.org'
-  set :adminpass, 'changeme'
-  set :haml, :format => :html5
-  set :default_theme, 'zenburnesque'
-  set :preferred_languages, [
-    'plain_text',
-    'ruby',
-    'python',
-    'tcl',
-    'javascript',
-    'html',
-    'c',
-    'c++',
-    'java',
-    'php'
-  ]
-  set :announce_irc, {
-    :uri => 'druby://falcon:7268',
-    :user => 'owner',
-    :pass => 'sdxDSss',
-    :channel => '#woot'
-  }
-end
+require 'toopaste.config'
 
 helpers do
   def protected!
