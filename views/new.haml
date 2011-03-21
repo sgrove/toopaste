@@ -17,7 +17,7 @@
         %input{ :type => 'text', :name => 'snippet_title' }
       .left
         %label{ :for => 'snippet_author' } Author:
-        %input{ :type => 'text', :name => 'snippet_author' }
+        %input{ :type => 'text', :name => 'snippet_author', :value => @author }
       .right
         %label{ :for => 'snippet_language' } Language:
         %select{ :name => 'snippet_language', :id => 'snippet_language' }

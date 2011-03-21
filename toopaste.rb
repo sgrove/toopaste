@@ -125,6 +125,9 @@ end
 get '/' do
   @preferred_languages = settings.preferred_languages
   @snippets = Snippet.last(10)
+  if session.has_key? :author
+    @author = session[:author]
+  end
   haml :new
 end
 
@@ -135,6 +138,8 @@ post '/' do
   else
     language = 'plain_text'
   end
+
+  session[:author] = params[:snippet_author]
 
   @snippet = Snippet.new(:title => params[:snippet_title],
                          :language => language,

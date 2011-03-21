@@ -2,7 +2,7 @@
 %html
   %head
     %title
-      = @title || settings.pagetitle
+      &= @title || settings.pagetitle
     %link{ :rel => 'stylesheet', :href => '/stylesheet.css' }
     - if @active_theme
       %link{ :rel => 'stylesheet', :href => "/ultraviolet/css/#{@active_theme}.css" }
