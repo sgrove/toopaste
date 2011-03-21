@@ -126,7 +126,7 @@ post '/' do
     language = 'plain_text'
   end
 
-  delete_at = Time.now.shift(params[:snippet_delete_at].to_i, params[:snippet_delete_at_unit].to_sym)
+  delete_at = Time.now.shift(params[:snippet_delete_at].to_i, params[:snippet_delete_at_unit].to_sym) unless params[:snippet_delete_at].empty?
   session[:author] = params[:snippet_author]
 
   @snippet = Snippet.new(:title => params[:snippet_title],
