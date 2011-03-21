@@ -13,6 +13,7 @@ Hints:
 ------
 
 * Change password in config, then delete snippets from the cli with
+
     curl -u <user>:<password> -X DELETE http://domain.tld/<snippetid>
 
 
