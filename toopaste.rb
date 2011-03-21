@@ -9,6 +9,7 @@ require 'haml'
 require 'sass'
 require 'uv'
 require 'rack-flash'
+require 'drb'
 
 configure do
   use Rack::Flash
@@ -30,6 +31,12 @@ configure do
     'java',
     'php'
   ]
+  set :announce_irc, {
+    :uri => 'druby://falcon:7268',
+    :user => 'owner',
+    :pass => 'sdxDSss',
+    :channel => '#woot'
+  }
 end
 
 helpers do
@@ -43,6 +50,10 @@ helpers do
   def authorized?
     @auth ||= Rack::Auth::Basic::Request.new(request.env)
     @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ['admin', settings.adminpass]
+  end
+
+  def base_url
+    @base_url ||= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
   end
 end
 
@@ -148,6 +159,21 @@ post '/' do
                         )
 
   if @snippet.save
+    if settings.announce_irc and params.has_key? 'announce_irc'
+      announce = 'new toopaste snippet'
+      if params[:snippet_author] and not params[:snippet_author].empty?
+        announce += " by #{params[:snippet_author]}"
+      end
+      if params[:snippet_title] and not params[:snippet_title].empty?
+        announce += ": #{params[:snippet_title]}"
+      end
+      announce += " #{base_url}/#{@snippet.id}"
+
+      drb = DRbObject.new_with_uri(settings.announce_irc[:uri])
+      id = drb.delegate(nil, "remote login #{settings.announce_irc[:user]} #{settings.announce_irc[:pass]}")[:return]
+      drb.delegate(id, "dispatch say #{settings.announce_irc[:channel]} #{announce}")
+    end
+
     redirect "/#{@snippet.id}"
   else
     flash[:error] = "<strong>Uh-oh, something went wrong:</strong><br />"
