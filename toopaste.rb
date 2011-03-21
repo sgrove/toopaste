@@ -12,6 +12,11 @@ require 'rack-flash'
 require 'drb'
 require 'toopaste.config'
 
+configure do
+  use Rack::Flash
+  enable :sessions
+end
+
 helpers do
   def protected!
     unless authorized?
