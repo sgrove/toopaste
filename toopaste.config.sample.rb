@@ -23,6 +23,7 @@ configure do
   #   permissions set +basics::talk::do::say for toopaste
   #
   set :announce_irc, {
+    :active => false,
     :uri => 'druby://127.0.0.1:7268',
     :user => 'toopaste',
     :pass => 'changeme',

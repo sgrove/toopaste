@@ -1,6 +1,8 @@
 #!/usr/local/bin/ruby -rubygems
 
+
 require 'sinatra'
+require 'toopaste.config'
 require 'dm-core'
 require 'dm-validations'
 require 'dm-timestamps'
@@ -10,8 +12,7 @@ require 'sass'
 require 'uv'
 require 'rack-flash'
 require 'facets/time'
-require 'drb'
-require 'toopaste.config'
+require 'drb' if settings.announce_irc[:active]
 
 configure do
   use Rack::Flash

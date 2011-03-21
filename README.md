@@ -22,5 +22,4 @@ TODO:
 
 * tags
 * line wrapping?
-* announcing to irc
 * spam protection
