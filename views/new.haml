@@ -12,23 +12,23 @@
   .snippet
     %h2 Paste a new code snippet
     %form{ :action => '/', :method => 'POST' }
-      %label{ :for => 'snippet_language' } Language:
-      %select{ :name => 'snippet_language', :id => 'snippet_language' }
-        / first the list of prefered languages
-        - @preferred_languages.each do |preferred|
-          %option{ :value => preferred} #{LANGUAGES[preferred]}
-        %option ------------------------------------------------------------------------
-        - LANGUAGES.keys.sort.each do |language|
-          - if not @preferred_languages.include? language
-            %option{ :value => language } #{LANGUAGES[language]}
+      %div
+        %label{ :for => 'snippet_title' } Title:
+        %input{ :type => 'text', :name => 'snippet_title' }
+      .left
+        %label{ :for => 'snippet_author' } Author:
+        %input{ :type => 'text', :name => 'snippet_author' }
+      .right
+        %label{ :for => 'snippet_language' } Language:
+        %select{ :name => 'snippet_language', :id => 'snippet_language' }
+          / first the list of prefered languages
+          - @preferred_languages.each do |preferred|
+            %option{ :value => preferred} #{LANGUAGES[preferred]}
+          %option ---------------------------------------------------
+          - LANGUAGES.keys.sort.each do |language|
+            - if not @preferred_languages.include? language
+              %option{ :value => language } #{LANGUAGES[language]}
       %br
+      %label{ :for => 'snippet_body' } Content:
       %textarea{ :name => 'snippet_body', :id => 'snippet_body', :rows => 20 }
-      %br
-      %label{ :for => 'snippet_title' } Title:
-      %input{ :type => 'text', :name => 'snippet_title' }
-      %br
-      %label{ :for => 'snippet_author' } Author:
-      %input{ :type => 'text', :name => 'snippet_author' }
-      %br
-      %br
       %input{ :type => 'submit', :value => 'Save' }

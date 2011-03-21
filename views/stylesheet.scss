@@ -65,7 +65,7 @@ $typedef:   #dfdfbf;
 $monospace: "Bitstream Vera Sans Mono", "Monaco", "Consolas", "Courier New", "monospace";
 
 body {
-    background-color: $gray;
+    background-color: $lightgray;
 }
 
 a,
@@ -79,28 +79,46 @@ a:hover {
     color: $blue;
 }
 
-input,
-textarea,
-select {
-    border: 1px solid $darkblue;
-    background-color: $gray;
-    -webkit-box-shadow: $lightgray 0px 0px 4px;
-    font-family: $monospace;
-    padding: 2px;
-}
+form {
+    .left {
+        float: left;
+        padding-right: 50px;
+    }
 
-textarea,
-input[type="text"] {
-    width: 604px;
-}
+    input,
+    textarea,
+    select {
+        border: 1px solid;
+        background-color: $gray;
+        -webkit-box-shadow: $lightgray 0px 0px 4px;
+        font-family: $monospace;
+        padding: 2px;
+        color: $black;
+    }
 
-select,
-input[type="submit"] {
-    width: 610px;
-}
+    textarea {
+        /*width: 694px;*/
+        width: 556px;
+    }
 
-label {
-    display: block;
+    select {
+        width: 256px;
+        height: 24px;
+        margin-top: 2px;
+    }
+
+    input[type="text"] {
+        width: 250px;
+    }
+
+    input[type="submit"] {
+        width: 200px;
+        margin-top: 15px;
+    }
+
+    label {
+        display: block;
+    }
 }
 
 #error {
