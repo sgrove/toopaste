@@ -12,13 +12,18 @@
   .snippet
     %h2 Paste a new code snippet
     %form{ :action => '/', :method => 'POST' }
-      %div
-        %label{ :for => 'snippet_title' } Title:
-        %input{ :type => 'text', :name => 'snippet_title' }
       .left
+        %label{ :for => 'snippet_title' } Title:
+        %input{ :type => 'text', :name => 'snippet_title', :id => 'snippet_title' }
         %label{ :for => 'snippet_author' } Author:
-        %input{ :type => 'text', :name => 'snippet_author', :value => @author }
+        %input{ :type => 'text', :name => 'snippet_author', :value => @author, :id => 'snippet_author' }
       .right
+        %label{ :for => 'snippet_delete_at' } Delete in
+        %input{ :type => 'text', :name => 'snippet_delete_at', :id => 'snippet_delete_at' }
+        %select{ :name => 'snippet_delete_at_unit', :id => 'snippet_delete_at_unit' }
+          %option{ :value => 'minutes'} Minutes
+          %option{ :value => 'hours'} Hours
+          %option{ :value => 'days'} Days
         %label{ :for => 'snippet_language' } Language:
         %select{ :name => 'snippet_language', :id => 'snippet_language' }
           / first the list of prefered languages

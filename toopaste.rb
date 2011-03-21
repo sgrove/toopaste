@@ -9,6 +9,7 @@ require 'haml'
 require 'sass'
 require 'uv'
 require 'rack-flash'
+require 'facets/time'
 require 'toopaste.config'
 
 configure do
@@ -67,6 +68,7 @@ class Snippet
   property :language,   String
   property :author,     String, :required => false
   property :body,       Text,   :required => true
+  property :delete_at,  DateTime
   property :created_at, DateTime
   property :updated_at, DateTime
 
@@ -124,12 +126,14 @@ post '/' do
     language = 'plain_text'
   end
 
+  delete_at = Time.now.shift(params[:snippet_delete_at].to_i, params[:snippet_delete_at_unit].to_sym)
   session[:author] = params[:snippet_author]
 
   @snippet = Snippet.new(:title => params[:snippet_title],
                          :language => language,
                          :body  => params[:snippet_body],
-                         :author => params[:snippet_author]
+                         :author => params[:snippet_author],
+                         :delete_at => delete_at
                         )
 
   if @snippet.save
@@ -149,6 +153,12 @@ get %r{/(raw|download)?/?(\d+)} do # '/:id' do
 
   @snippet = Snippet.get(id)
   if @snippet
+    delete_at = Time.parse(@snippet.delete_at.to_s)
+    if delete_at.past? and not @snippet.delete_at.nil?
+      @snippet.destroy
+      raise not_found
+    end
+
     if raw or download
       disposition = 'inline'
       disposition = 'attachment' if download

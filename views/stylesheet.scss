@@ -84,6 +84,10 @@ form {
         float: left;
         padding-right: 50px;
     }
+ 
+    label {
+        display: block;
+    }
 
     input,
     textarea,
@@ -96,19 +100,12 @@ form {
         color: $black;
     }
 
-    textarea {
-        /*width: 694px;*/
-        width: 556px;
-    }
-
-    select {
-        width: 256px;
-        height: 24px;
-        margin-top: 2px;
-    }
-
-    input[type="text"] {
+    input {
         width: 250px;
+    }
+
+    input#snippet_delete_at {
+        width: 50px;
     }
 
     input[type="submit"] {
@@ -116,8 +113,19 @@ form {
         margin-top: 15px;
     }
 
-    label {
-        display: block;
+    select {
+        width: 256px;
+        height: 24px;
+        margin-top: 2px;
+        padding-top: 1px;
+    }
+
+    select#snippet_delete_at_unit {
+        width: 196px;
+    }
+
+    textarea {
+        width: 556px;
     }
 }
 
@@ -145,7 +153,8 @@ form {
     float: right;
 }
 
-#switch-theme select, input {
+#switch-theme select,
+input {
     width: auto;
 }
 

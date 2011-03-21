@@ -20,7 +20,6 @@ Hints:
 TODO:
 -----
 
-* snippet retention
 * tags
 * line wrapping?
 * announcing to irc
