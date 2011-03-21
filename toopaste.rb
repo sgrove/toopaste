@@ -15,6 +15,7 @@ configure do
   enable :sessions
 
   set :pagetitle, 'paste.geekosphere.org'
+  set :adminpass, 'changeme'
   set :haml, :format => :html5
   set :default_theme, 'zenburnesque'
   set :preferred_languages, [
@@ -29,6 +30,20 @@ configure do
     'java',
     'php'
   ]
+end
+
+helpers do
+  def protected!
+    unless authorized?
+      response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+      throw(:halt, [401, "Y U NO AUTHENTICATE?\n"])
+    end
+  end
+
+  def authorized?
+    @auth ||= Rack::Auth::Basic::Request.new(request.env)
+    @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ['admin', settings.adminpass]
+  end
 end
 
 # setup constants for supported languages and themes, in ultraviolet they are 
@@ -177,6 +192,17 @@ post '/switch_theme' do
     session[:active_theme] = params[:theme]
   end
   redirect to("/#{params[:snippet_id]}")
+end
+
+# delete snippet
+delete '/:id' do
+  protected!
+  snippet = Snippet.get(params[:id])
+  if snippet.destroy
+    "##{params[:id]} deleted, yo."
+  else
+    raise not_found
+  end
 end
 
 # 404
