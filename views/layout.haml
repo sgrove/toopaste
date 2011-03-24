@@ -7,6 +7,7 @@
     - if @active_theme
       %link{ :rel => 'stylesheet', :href => "/ultraviolet/css/#{@active_theme}.css" }
     %script{ :src => '/jquery.min.js' }
+    %script{ :src => '/jquery.noisy.min.js' }
     :javascript
       jQuery(function(){
         $('#toggle-lines').click(function(event) {
@@ -17,6 +18,7 @@
           $('#switch-theme').submit();
         });
         $('#switch-theme input[type="submit"]').hide();
+        $('body').noisy();
       });
   %body
     #wrapper.container_12
