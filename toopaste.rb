@@ -7,6 +7,7 @@ require 'dm-core'
 require 'dm-validations'
 require 'dm-timestamps'
 require 'dm-migrations'
+require 'dm-types'
 require 'haml'
 require 'sass'
 require 'uv'
@@ -71,7 +72,8 @@ class Snippet
   property :id,         Serial
   property :title,      String
   property :language,   String
-  property :author,     String, :required => false
+  property :author,     String
+  property :visibility, Enum[:public, :private], :default => :public
   property :body,       Text,   :required => true
   property :delete_at,  DateTime
   property :created_at, DateTime
@@ -116,7 +118,7 @@ end
 # new
 get '/' do
   @preferred_languages = settings.preferred_languages
-  @snippets = Snippet.last(settings.snippets_in_sidebar_count)
+  @snippets = Snippet.last(settings.snippets_in_sidebar_count, :visibility => 'public')
   if session.has_key? :author
     @author = session[:author]
   end
@@ -133,11 +135,13 @@ post '/' do
 
   delete_at = Time.now.shift(params[:snippet_delete_at].to_i, params[:snippet_delete_at_unit].to_sym) unless params[:snippet_delete_at].empty?
   session[:author] = params[:snippet_author]
+  visibility = params[:snippet_visibility] || 'public'
 
   @snippet = Snippet.new(:title => params[:snippet_title],
                          :language => language,
                          :body  => params[:snippet_body],
                          :author => params[:snippet_author],
+                         :visibility => visibility,
                          :delete_at => delete_at
                         )
 
