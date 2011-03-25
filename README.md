@@ -8,7 +8,9 @@ Live Demo: [paste.geekosphere.org](http://paste.geekosphere.org)
 Features:
 ---------
 
-* Snippet retention
+* Optionally limited snippet retention
+* Randomly generated ids (36^4 possibilities)
+* Option to post private (unlisted) snippets
 * Announcing of new snippets to an IRC bot ([4poc](https://github.com/4poc))
 * Include ultraviolet styles, switchable ([4poc](https://github.com/4poc))
 * Change password in config, then delete snippets from the cli with
@@ -41,4 +43,3 @@ TODO:
 * tags
 * line wrapping?
 * spam protection
-* private snippets
