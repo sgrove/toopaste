@@ -118,7 +118,7 @@ end
 # new
 get '/' do
   @preferred_languages = settings.preferred_languages
-  @snippets = Snippet.last(settings.snippets_in_sidebar_count, :visibility => 'public')
+  @snippets = Snippet.all(:visibility => 'public', :order => [:created_at.desc], :limit => settings.snippets_in_sidebar_count)
   if session.has_key? :author
     @author = session[:author]
   end
