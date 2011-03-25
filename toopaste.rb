@@ -227,9 +227,9 @@ delete '/:random_id' do
   protected!
   snippet = Snippet.get(params[:random_id])
   if snippet.destroy
-    "##{params[:random_id]} deleted, yo."
+    "snippet ##{params[:random_id]} won't be a problem anymore, sir."
   else
-    raise not_found
+    "snippet ##{params[:random_id]} is in another castle."
   end
 end
 
