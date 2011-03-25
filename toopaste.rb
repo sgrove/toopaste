@@ -138,7 +138,7 @@ post '/' do
   visibility = params[:snippet_visibility] || 'public'
 
   o = [('a'..'z'),('0'..'9')].map{|i| i.to_a}.flatten
-  random_id = (0..3).map{ o[rand(o.length)] }.join
+  begin random_id = (0..3).map{ o[rand(o.length)] }.join end until not Snippet.get(random_id)
 
   @snippet = Snippet.new(:title => params[:snippet_title],
                          :language => language,
