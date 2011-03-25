@@ -69,12 +69,12 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/toopaste
 class Snippet
   include DataMapper::Resource
 
-  property :id,         Serial
+  property :random_id,  String,    :key => true
   property :title,      String
   property :language,   String
   property :author,     String
   property :visibility, Enum[:public, :private], :default => :public
-  property :body,       Text,   :required => true
+  property :body,       Text,      :required => true
   property :delete_at,  DateTime
   property :created_at, DateTime
   property :updated_at, DateTime
@@ -83,7 +83,7 @@ class Snippet
     if not @title.empty?
       @title
     else
-      "##{@id}"
+      "##{@random_id}"
     end
   end
 
@@ -137,12 +137,16 @@ post '/' do
   session[:author] = params[:snippet_author]
   visibility = params[:snippet_visibility] || 'public'
 
+  o = [('a'..'z'),('0'..'9')].map{|i| i.to_a}.flatten
+  random_id = (0..3).map{ o[rand(o.length)] }.join
+
   @snippet = Snippet.new(:title => params[:snippet_title],
                          :language => language,
                          :body  => params[:snippet_body],
                          :author => params[:snippet_author],
                          :visibility => visibility,
-                         :delete_at => delete_at
+                         :delete_at => delete_at,
+                         :random_id => random_id
                         )
 
   if @snippet.save
@@ -154,14 +158,14 @@ post '/' do
       if params[:snippet_title] and not params[:snippet_title].empty?
         announce += ": #{params[:snippet_title]}"
       end
-      announce += " #{base_url}/#{@snippet.id}"
+      announce += " #{base_url}/#{@snippet.random_id}"
 
       drb = DRbObject.new_with_uri(settings.announce_irc[:uri])
-      id = drb.delegate(nil, "remote login #{settings.announce_irc[:user]} #{settings.announce_irc[:pass]}")[:return]
-      drb.delegate(id, "dispatch say #{settings.announce_irc[:channel]} #{announce}")
+      random_id = drb.delegate(nil, "remote login #{settings.announce_irc[:user]} #{settings.announce_irc[:pass]}")[:return]
+      drb.delegate(random_id, "dispatch say #{settings.announce_irc[:channel]} #{announce}")
     end
 
-    redirect "/#{@snippet.id}"
+    redirect "/#{@snippet.random_id}"
   else
     flash[:error] = "<strong>Uh-oh, something went wrong:</strong><br />"
     @snippet.errors.each { |e| flash[:error] += e.to_s + ".<br />" }
@@ -170,12 +174,12 @@ post '/' do
 end
 
 # show
-get %r{/(raw|download)?/?(\d+)} do # '/:id' do
+get %r{/(raw|download)?/?([a-z0-9]+)} do # '/:random_id' do
   raw = true if params[:captures][0] and params[:captures][0] == 'raw'
   download = true if params[:captures][0] and params[:captures][0] == 'download'
-  id = params[:captures][1]
+  random_id = params[:captures][1]
 
-  @snippet = Snippet.get(id)
+  @snippet = Snippet.get(random_id)
   if @snippet
     delete_at = Time.parse(@snippet.delete_at.to_s)
     if delete_at.past? and not @snippet.delete_at.nil?
@@ -215,15 +219,15 @@ post '/switch_theme' do
   if THEMES.include? params[:theme]
     session[:active_theme] = params[:theme]
   end
-  redirect to("/#{params[:snippet_id]}")
+  redirect to("/#{params[:snippet_random_id]}")
 end
 
 # delete snippet
-delete '/:id' do
+delete '/:random_id' do
   protected!
-  snippet = Snippet.get(params[:id])
+  snippet = Snippet.get(params[:random_id])
   if snippet.destroy
-    "##{params[:id]} deleted, yo."
+    "##{params[:random_id]} deleted, yo."
   else
     raise not_found
   end

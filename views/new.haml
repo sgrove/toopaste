@@ -4,7 +4,7 @@
     %ul
       - @snippets.each do |snippet|
         %li
-          %a{ :href => snippet.id, :title => snippet.title }
+          %a{ :href => snippet.random_id, :title => snippet.title }
             & #{snippet.title}
             - if LANGUAGES.has_key? snippet.language
               & (#{LANGUAGES[snippet.language]})
